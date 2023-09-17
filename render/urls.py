@@ -1,7 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views.user_detail import UserDetailViewSet
+from render.views import views
+
+
+from render.views.user_detail import UserDetailViewSet
 
 router = DefaultRouter()
 router.register(
@@ -11,6 +14,7 @@ router.register(
 )
 
 urlpatterns = [
+    path("", views.index, name="index"),
     path(
         "cab/",
         include((router.urls, "cab"), namespace="cab"),
