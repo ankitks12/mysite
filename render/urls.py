@@ -1,7 +1,18 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
-from . import views
+from .views.user_detail import UserDetailViewSet
+
+router = DefaultRouter()
+router.register(
+    r"user-detail",
+    UserDetailViewSet,
+    basename="user-detail",
+)
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path(
+        "cab/",
+        include((router.urls, "cab"), namespace="cab"),
+    ),
 ]
